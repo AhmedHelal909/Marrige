@@ -5,12 +5,16 @@ namespace App\Http\Controllers\Api\site;
 use App\CustomClass\response;
 use App\Http\Resources\employeeResource;
 use App\Http\Resources\employerResource;
+use App\Http\Resources\HusbandResource;
+use App\Http\Resources\WifeResource;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use App\Models\Employees;
 use App\Models\Employer;
+use App\Models\Husband;
+use App\Models\Wife;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -40,10 +44,10 @@ class profileController
             return response::falid('token_absent', 400);
         }
 
-        if($guard == 'employee'){
-            return response::suceess('success', 200, 'employee', new employeeResource($user));
+        if($guard == 'husband'){
+            return response::suceess('success', 200, 'husband', new HusbandResource($user));
         } else {
-            return response::suceess('success', 200, 'employee', new employerResource($user));
+            return response::suceess('success', 200, 'wife', new WifeResource($user));
         }
     }
 
@@ -291,7 +295,7 @@ class profileController
 
         // validate registeration request
         $validator = Validator::make($request->all(), [
-            'fullName'          => 'nullable|string|max:250',
+            'user'          => 'nullable|string|max:250',
             'title'             => 'nullable|string|max:250',
             'email'             => 'nullable|email|max:255|unique:employers,email,'. $employer->id,
             'password'          => 'nullable|string|min:6',
@@ -393,6 +397,387 @@ class profileController
 
         if($employer->save()){
             return response::suceess('update profile success', 200, 'employer',  new employerResource($employer));
+        } else {
+            return response::falid('update profile falid', 400);
+        }
+    }
+    public function updateWifeProfile(Request $request){
+        try {
+            if (! $employer = auth('wife')->user()) {
+                return response::falid('user_not_found', 404);
+            }
+
+        } catch (TokenExpiredException $e) {
+
+            return response::falid('token_expired', 401);
+
+        } catch (TokenInvalidException $e) {
+
+            return response::falid('token_invalid', 401);
+            
+        } catch (JWTException $e) {
+
+            return response::falid('token_absent', 401);
+        }
+
+        // validate registeration request
+        $validator = Validator::make($request->all(), [
+            'user_name'          => 'nullable|string|max:250',
+            'email'             => 'nullable|email|max:255|unique:employers,email,'. $employer->id,
+            'password'          => 'nullable|string|min:6',
+            'confirmPassword'   => 'required_with:password|string|same:password',
+            'country_id'    => 'nullable|string|min:8',
+            'marrige_type'    => 'nullable|string|min:8',
+            'social_status'      => 'nullable|string|max:250',
+            'age'           => 'nullable|string|max:250',
+            'child_no'              => 'nullable|string|max:250',
+            'weight'    => 'nullable|string|max:250',
+            'height'    => 'nullable|string|max:250',
+            'skin_color'    => 'nullable|string|max:250',
+            'physique'    => 'nullable|string|max:250',
+            'religiosity'           => 'nullable|string|max:250',
+            'pray'           => 'nullable|string|max:250',
+            'smoke'           => 'nullable|string|max:250',
+            'hijab'           => 'nullable|string|max:250',
+            'educational_equal'           => 'nullable|string|max:250',
+            'financial_status'           => 'nullable|string|max:250',
+            'health_status'           => 'nullable|string|max:250',
+            'monthly_income'           => 'nullable|string|max:250',
+            'partner_specification'           => 'nullable|string|max:250',
+            'self_description'           => 'nullable|string|max:250',
+            'fullname'           => 'nullable|string|max:250',
+            'phone'           => 'nullable|string|max:250',
+            'job'           => 'nullable|string|max:250',
+            'work'           => 'nullable|string|max:250',
+            'nationality'           => 'nullable|string|max:250',
+            'token_firebase'           => 'nullable|string|max:250',
+            'image'             => 'nullable|file',
+        ]);
+
+        if($validator->fails()){
+            return response::falid($validator->errors(), 422);
+        }
+
+
+        //sellect employer
+        $employer = Wife::find($employer->id)->makeVisible(['company_name',
+        'country', 'city', 'business', 'established_at', 'website', 'image', 'mobile_number2']);
+
+        //update data
+        if($request->has('password')){
+            if(Hash::check($request->oldPassword, $employer->password)){
+                $employer->password  = Hash::make($request->get('password'));
+                
+            } else {
+                return response::falid('old password is wrong', 405);
+            }
+        }
+
+        if($request->has('user_name')){
+            $employer->user_name      = $request->get('fullName');
+        }
+        if($request->has('email')){
+            $employer->email         = $request->get('email');
+        }
+
+        if($request->has('country_id')){
+            $employer->country_id       = $request->get('country_id');
+        }
+        if($request->has('marrige_type')){
+            $employer->marrige_type       = $request->get('marrige_type');
+        }
+        if($request->has('social_status')){
+            $employer->social_status       = $request->get('social_status');
+        }
+        if($request->has('age')){
+            $employer->age       = $request->get('age');
+        }
+        if($request->has('child_no')){
+            $employer->child_no       = $request->get('child_no');
+        }
+
+        if($request->has('weight')){
+            $employer->weight       = $request->get('weight');
+        }
+
+        if($request->has('height')){
+            $employer->height          = $request->get('height');
+        }
+
+        if($request->has('skin_color')){
+            $employer->skin_color       = $request->get('skin_color');
+        }
+
+        if($request->has('physique')){
+            $employer->physique       = $request->get('physique');
+        }
+
+        if($request->has('religiosity')){
+            $employer->religiosity       = $request->get('religiosity');
+        }
+
+        if($request->has('pray')){
+            $employer->pray       = $request->get('pray');
+        }
+
+        if($request->has('smoke')){
+            $employer->smoke       = $request->get('smoke');
+        }
+
+        if($request->has('hijab')){
+            $employer->hijab       = $request->get('hijab');
+        }
+        if($request->has('educational_equal')){
+            $employer->educational_equal       = $request->get('educational_equal');
+        }
+        if($request->has('financial_status')){
+            $employer->financial_status       = $request->get('financial_status');
+        }
+        if($request->has('health_status')){
+            $employer->health_status       = $request->get('health_status');
+        }
+        if($request->has('monthly_income')){
+            $employer->monthly_income       = $request->get('monthly_income');
+        }
+        if($request->has('partner_specification')){
+            $employer->partner_specification       = $request->get('partner_specification');
+        }
+        if($request->has('self_description')){
+            $employer->self_description       = $request->get('self_description');
+        }
+        if($request->has('fullname')){
+            $employer->fullname       = $request->get('fullname');
+        }
+        if($request->has('phone')){
+            $employer->phone       = $request->get('phone');
+        }
+        if($request->has('job')){
+            $employer->job       = $request->get('job');
+        }
+        if($request->has('work')){
+            $employer->work       = $request->get('work');
+        }
+        if($request->has('nationality')){
+            $employer->nationality       = $request->get('nationality');
+        }
+        if($request->has('token_firebase')){
+            $employer->token_firebase       = $request->get('token_firebase');
+        }
+
+        //updat image
+        if($request->has('image')){
+            if($employer->image == null){
+                $path = rand(0,1000000) . time() . '.' . $request->file('image')->getClientOriginalExtension();
+                $request->file('image')->move(base_path('public/uploads/husbands') , $path);
+                $employer->image   = $path;
+            } else {
+                $oldImage = $employer->image;
+
+                //updat image
+                $path = rand(0,1000000) . time() . '.' . $request->file('image')->getClientOriginalExtension();
+                $request->file('image')->move(base_path('public/uploads/wives') , $path);
+                $employer->image   = $path;
+
+                //delet old image
+                if(file_exists(base_path('public/uploads/wives/') . $oldImage)){
+                    unlink(base_path('public/uploads/wives/') . $oldImage);
+                }   
+            }
+        }
+
+
+        if($employer->save()){
+            return response::suceess('update profile success', 200, 'employer',  new WifeResource($employer));
+        } else {
+            return response::falid('update profile falid', 400);
+        }
+    }
+    public function updateHusbandProfile(Request $request){
+        try {
+            if (! $employer = auth('husband')->user()) {
+                return response::falid('user_not_found', 404);
+            }
+
+        } catch (TokenExpiredException $e) {
+
+            return response::falid('token_expired', 401);
+
+        } catch (TokenInvalidException $e) {
+
+            return response::falid('token_invalid', 401);
+            
+        } catch (JWTException $e) {
+
+            return response::falid('token_absent', 401);
+        }
+
+        // validate registeration request
+        $validator = Validator::make($request->all(), [
+            'user_name'          => 'nullable|string|max:250',
+            'email'             => 'nullable|email|max:255|unique:employers,email,'. $employer->id,
+            'password'          => 'nullable|string|min:6',
+            'confirmPassword'   => 'required_with:password|string|same:password',
+            'country_id'    => 'nullable|string|min:8',
+            'marrige_type'    => 'nullable|string|min:8',
+            'social_status'      => 'nullable|string|max:250',
+            'age'           => 'nullable|string|max:250',
+            'child_no'              => 'nullable|string|max:250',
+            'weight'    => 'nullable|string|max:250',
+            'height'    => 'nullable|string|max:250',
+            'skin_color'    => 'nullable|string|max:250',
+            'physique'    => 'nullable|string|max:250',
+            'religiosity'           => 'nullable|string|max:250',
+            'pray'           => 'nullable|string|max:250',
+            'smoke'           => 'nullable|string|max:250',
+            'beard'           => 'nullable|string|max:250',
+            'educational_equal'           => 'nullable|string|max:250',
+            'financial_status'           => 'nullable|string|max:250',
+            'health_status'           => 'nullable|string|max:250',
+            'monthly_income'           => 'nullable|string|max:250',
+            'partner_specification'           => 'nullable|string|max:250',
+            'self_description'           => 'nullable|string|max:250',
+            'fullname'           => 'nullable|string|max:250',
+            'phone'           => 'nullable|string|max:250',
+            'job'           => 'nullable|string|max:250',
+            'work'           => 'nullable|string|max:250',
+            'nationality'           => 'nullable|string|max:250',
+            'token_firebase'           => 'nullable|string|max:250',
+            'image'             => 'nullable|file',
+        ]);
+
+        if($validator->fails()){
+            return response::falid($validator->errors(), 422);
+        }
+
+
+        //sellect employer
+        $employer = Husband::find($employer->id);
+
+        //update data
+        if($request->has('password')){
+            if(Hash::check($request->oldPassword, $employer->password)){
+                $employer->password  = Hash::make($request->get('password'));
+                
+            } else {
+                return response::falid('old password is wrong', 405);
+            }
+        }
+
+        if($request->has('user_name')){
+            $employer->user_name      = $request->get('fullName');
+        }
+        if($request->has('email')){
+            $employer->email         = $request->get('email');
+        }
+
+        if($request->has('country_id')){
+            $employer->country_id       = $request->get('country_id');
+        }
+        if($request->has('marrige_type')){
+            $employer->marrige_type       = $request->get('marrige_type');
+        }
+        if($request->has('social_status')){
+            $employer->social_status       = $request->get('social_status');
+        }
+        if($request->has('age')){
+            $employer->age       = $request->get('age');
+        }
+        if($request->has('child_no')){
+            $employer->child_no       = $request->get('child_no');
+        }
+
+        if($request->has('weight')){
+            $employer->weight       = $request->get('weight');
+        }
+
+        if($request->has('height')){
+            $employer->height          = $request->get('height');
+        }
+
+        if($request->has('skin_color')){
+            $employer->skin_color       = $request->get('skin_color');
+        }
+
+        if($request->has('physique')){
+            $employer->physique       = $request->get('physique');
+        }
+
+        if($request->has('religiosity')){
+            $employer->religiosity       = $request->get('religiosity');
+        }
+
+        if($request->has('pray')){
+            $employer->pray       = $request->get('pray');
+        }
+
+        if($request->has('smoke')){
+            $employer->smoke       = $request->get('smoke');
+        }
+
+        if($request->has('beard')){
+            $employer->beard       = $request->get('beard');
+        }
+        if($request->has('educational_equal')){
+            $employer->educational_equal       = $request->get('educational_equal');
+        }
+        if($request->has('financial_status')){
+            $employer->financial_status       = $request->get('financial_status');
+        }
+        if($request->has('health_status')){
+            $employer->health_status       = $request->get('health_status');
+        }
+        if($request->has('monthly_income')){
+            $employer->monthly_income       = $request->get('monthly_income');
+        }
+        if($request->has('partner_specification')){
+            $employer->partner_specification       = $request->get('partner_specification');
+        }
+        if($request->has('self_description')){
+            $employer->self_description       = $request->get('self_description');
+        }
+        if($request->has('fullname')){
+            $employer->fullname       = $request->get('fullname');
+        }
+        if($request->has('phone')){
+            $employer->phone       = $request->get('phone');
+        }
+        if($request->has('job')){
+            $employer->job       = $request->get('job');
+        }
+        if($request->has('work')){
+            $employer->work       = $request->get('work');
+        }
+        if($request->has('nationality')){
+            $employer->nationality       = $request->get('nationality');
+        }
+        if($request->has('token_firebase')){
+            $employer->token_firebase       = $request->get('token_firebase');
+        }
+
+        //updat image
+        if($request->has('image')){
+            if($employer->image == null){
+                $path = rand(0,1000000) . time() . '.' . $request->file('image')->getClientOriginalExtension();
+                $request->file('image')->move(base_path('public/uploads/husbands') , $path);
+                $employer->image   = $path;
+            } else {
+                $oldImage = $employer->image;
+
+                //updat image
+                $path = rand(0,1000000) . time() . '.' . $request->file('image')->getClientOriginalExtension();
+                $request->file('image')->move(base_path('public/uploads/husbands') , $path);
+                $employer->image   = $path;
+
+                //delet old image
+                if(file_exists(base_path('public/uploads/husbands/') . $oldImage)){
+                    unlink(base_path('public/uploads/husbands/') . $oldImage);
+                }   
+            }
+        }
+
+
+        if($employer->save()){
+            return response::suceess('update profile success', 200, 'employer',  new HusbandResource($employer));
         } else {
             return response::falid('update profile falid', 400);
         }

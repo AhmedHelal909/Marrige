@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Hash;
 
 class WifeResource extends JsonResource
 {
@@ -14,7 +15,7 @@ class WifeResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
+   
             return[
                 'user_name'          => $this->user_name,
                 'email'             => $this->email,
@@ -47,6 +48,6 @@ class WifeResource extends JsonResource
                 'image'                 =>($this->image != null) ? (url('/') . '/uploads/wives/' . $this->image) : (url('/') . '/uploads/wives/default.jpg'),
                 
             ];
-        ];
+       
     }
 }

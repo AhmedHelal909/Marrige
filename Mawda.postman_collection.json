@@ -30,12 +30,12 @@
 							"formdata": [
 								{
 									"key": "user_name",
-									"value": "ahmedhelal334",
+									"value": "araklkjkjkjkj",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "kddddr@gmail.com",
+									"value": "moskdjkk@gmail.com",
 									"type": "text"
 								},
 								{
@@ -176,20 +176,21 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/ResscuE CenTeR/Downloads/JC45804 (10).jpg"
+									"src": "/C:/Users/ResscuE CenTeR/Desktop/18.PNG"
+								},
+								{
+									"key": "image",
+									"value": "",
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/register",
-							"protocol": "http",
+							"raw": "{{local}}/api/register",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{local}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"register"
@@ -225,15 +226,10 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/login",
-							"protocol": "http",
+							"raw": "{{local}}/api/login",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{local}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"login"
@@ -249,7 +245,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjMyNjYzNDg4LCJuYmYiOjE2MzI2NjM0ODgsImp0aSI6IjlNRDJBaUxkMWd6N3oyY2QiLCJzdWIiOjExLCJwcnYiOiI3OGIzZDYwNzc1ZDA4ZWQ2YTQ1OGViM2ZjMWRhNzk1YjM1ZDM4NjdhIiwidHlwZSI6Imh1c2JhbmQifQ.vzsWS_5fVoYWB-eTipYD6omB7vAqe4_dk_9Jk0ChMFA",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYWxnb3JpdGhtLmRlbW8uY2FybWFydGFwcC5jb20vTW93YWRhL3B1YmxpYy9hcGkvbG9naW4iLCJpYXQiOjE2MzI3NDYxMzAsIm5iZiI6MTYzMjc0NjEzMCwianRpIjoiQXJ6VHhyZUZyWlZ3Wm8wQSIsInN1YiI6MTEsInBydiI6Ijc4YjNkNjA3NzVkMDhlZDZhNDU4ZWIzZmMxZGE3OTViMzVkMzg2N2EiLCJ0eXBlIjoiaHVzYmFuZCJ9.EiAiNoW2g45sXLuPsiQX43sC5EmedqQBASs8AG4iY5A",
 								"type": "text"
 							}
 						],
@@ -258,15 +254,10 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/husband/logout",
-							"protocol": "http",
+							"raw": "{{local}}/api/husband/logout",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{local}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"husband",
@@ -278,6 +269,81 @@
 									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjMyNjYyNjgxLCJuYmYiOjE2MzI2NjI2ODEsImp0aSI6IkVVMVM2bVdkbTVmT3dkdTkiLCJzdWIiOjExLCJwcnYiOiI3OGIzZDYwNzc1ZDA4ZWQ2YTQ1OGViM2ZjMWRhNzk1YjM1ZDM4NjdhIn0.4ekA-ttByAk4u5QiF22UK662YXibDA3kHHKyvV4CDV8",
 									"disabled": true
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYWxnb3JpdGhtLmRlbW8uY2FybWFydGFwcC5jb20vTW93YWRhL3B1YmxpYy9hcGkvbG9naW4iLCJpYXQiOjE2MzI4MTk3NjcsIm5iZiI6MTYzMjgxOTc2NywianRpIjoiRTg3TlJZd2M1UTNUelU4MSIsInN1YiI6MTEsInBydiI6Ijc4YjNkNjA3NzVkMDhlZDZhNDU4ZWIzZmMxZGE3OTViMzVkMzg2N2EiLCJ0eXBlIjoiaHVzYmFuZCJ9.pmmafA609IVo2wjjmINfGeVy013BqVK4RvwqWM8TdN0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjMyNjcwNDY0LCJuYmYiOjE2MzI2NzA0NjQsImp0aSI6ImFnc3JXa0NWTWFZd3FkWloiLCJzdWIiOjExLCJwcnYiOiI3OGIzZDYwNzc1ZDA4ZWQ2YTQ1OGViM2ZjMWRhNzk1YjM1ZDM4NjdhIiwidHlwZSI6Imh1c2JhbmQifQ.SdW-7G_O7FkvDAL7C0vuC2cDoqimfBOX9LS_6Pu142M",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{local}}/api/husband/profile",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"husband",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateprofile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjMyODI1MTA4LCJuYmYiOjE2MzI4MjUxMDgsImp0aSI6InZ1bHFTdXV2VGZGMTJEODEiLCJzdWIiOjExLCJwcnYiOiI3OGIzZDYwNzc1ZDA4ZWQ2YTQ1OGViM2ZjMWRhNzk1YjM1ZDM4NjdhIiwidHlwZSI6Imh1c2JhbmQifQ.d3U_zeAiTkpT_zWmnkF8TJKokBcAT6OwGzfyjIr8qJ0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "token",
+									"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjMyODI1MTA4LCJuYmYiOjE2MzI4MjUxMDgsImp0aSI6InZ1bHFTdXV2VGZGMTJEODEiLCJzdWIiOjExLCJwcnYiOiI3OGIzZDYwNzc1ZDA4ZWQ2YTQ1OGViM2ZjMWRhNzk1YjM1ZDM4NjdhIiwidHlwZSI6Imh1c2JhbmQifQ.d3U_zeAiTkpT_zWmnkF8TJKokBcAT6OwGzfyjIr8qJ0",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{local}}/api/husband/updateProfile",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"husband",
+								"updateProfile"
 							]
 						}
 					},
@@ -298,12 +364,12 @@
 							"formdata": [
 								{
 									"key": "user_name",
-									"value": "ahmedhelal",
+									"value": "ahmedhelal1234",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "kedr@gmail.com",
+									"value": "kedr4427@gmail.com",
 									"type": "text"
 								},
 								{
@@ -449,15 +515,10 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/registerwife",
-							"protocol": "http",
+							"raw": "{{local}}/api/registerwife",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{local}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"registerwife"
@@ -487,15 +548,10 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/loginwife",
-							"protocol": "http",
+							"raw": "{{local}}/api/loginwife",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{local}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"loginwife"
@@ -516,19 +572,74 @@
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/wife/logout",
-							"protocol": "http",
+							"raw": "{{local}}/api/wife/logout",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{local}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"wife",
 								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2lud2lmZSIsImlhdCI6MTYzMjgxNzYxMiwibmJmIjoxNjMyODE3NjEyLCJqdGkiOiJLZjJPMkhMYm5LN3FYN0daIiwic3ViIjoyLCJwcnYiOiIzOGUyNWE5ZDI0MDJmMzA2YmJjNTU1ZjlhZDQ5ODc4NDRjNzM1ZjFmIiwidHlwZSI6IndpZmUifQ.IpJ0UhvAkSRiAAOREsI_h4HJPq6dCM9xDCQUhQtDdIQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local}}/api/wife/profile",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"wife",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateprofile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2lud2lmZSIsImlhdCI6MTYzMjgxNzYxMiwibmJmIjoxNjMyODE3NjEyLCJqdGkiOiJLZjJPMkhMYm5LN3FYN0daIiwic3ViIjoyLCJwcnYiOiIzOGUyNWE5ZDI0MDJmMzA2YmJjNTU1ZjlhZDQ5ODc4NDRjNzM1ZjFmIiwidHlwZSI6IndpZmUifQ.IpJ0UhvAkSRiAAOREsI_h4HJPq6dCM9xDCQUhQtDdIQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/ResscuE CenTeR/Desktop/Capture2.PNG"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{local}}/api/wife/updateProfile",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"wife",
+								"updateProfile"
 							]
 						}
 					},

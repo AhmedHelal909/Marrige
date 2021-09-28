@@ -20,9 +20,13 @@ Route::post('login', 'Api\site\authentication@authenticate')->name('husband');
 Route::group(['middleware' => ['auth_hus'],
 'prefix'=>'husband',
   ], function() {
+Route::get('profile', 'Api\site\profileController@getProfile')->name('husband');
 Route::post('logout', 'Api\site\authentication@logout')->name('husband');
+Route::post('updateProfile', 'Api\site\profileController@updateHusbandProfile');
+
 
 });
+Route::post('forgetPassword', 'Api\site\resetPassword@sendEmail')->name('husband');
 
 
 //register wife
@@ -31,9 +35,13 @@ Route::post('loginwife', 'Api\site\authentication@authenticate')->name('wife');
 Route::group(['middleware' => ['auth_wife'],
 'prefix'=>'wife',
   ], function() {
-
+Route::get('profile', 'Api\site\profileController@getProfile')->name('wife');
 Route::post('logout', 'Api\site\authentication@logout')->name('wife');
+Route::post('updateProfile', 'Api\site\profileController@updateWifeProfile');
+
 });
+
+
 
 
 
@@ -42,7 +50,7 @@ Route::post('register/socialite', 'Api\site\register@socialiteRegisterEmployee')
 // Route::post('login', 'Api\site\authentication@authenticate')->name('employee');
 Route::post('login/socialite', 'Api\site\authentication@socialiteAuthenticate');
 
-Route::post('forgetPassword', 'Api\site\resetPassword@sendEmail')->name('employee');
+// Route::post('forgetPassword', 'Api\site\resetPassword@sendEmail')->name('employee');
 Route::post('changePassword', 'Api\site\resetPassword@passwordResetProcess')->name('employee');
 
 Route::group(['middleware' => ['auth_emp']], function() {
